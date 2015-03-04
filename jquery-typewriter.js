@@ -2,61 +2,55 @@
  
     $.fn.typeWriter = function( options ) {
  
-        // This is the easiest way to have default options.
         var settings = $.extend({
-            // These are the defaults.
             txt: "Hello, World",
             audioSrc:"",
             interval:500
         }, options );
  
-        // Greenify the collection based on the settings variable.
         return this.each(function (){
             
             $(this).text(settings.txt.length);
 
-            var track = "";
+            var track = "",
+                len   = settings.txt.length,
+                n     = 0,
+                aud   = new Audio(settings.audioSrc);
 
-var len = settings.txt.length;
+            $(this).text("");
 
-var n = 0;
+            var si = setInterval($.proxy(function () {
+                        typeWriting.call(this);
+                    }, this), settings.interval);
 
-var aud = new Audio(settings.audioSrc);
+            function typeWriting(){
+                if(!aud.paused){    
+                aud.pause();
+                aud.currentTime = 0;
+            }
 
-$(this).text("");
+            var res = track + settings.txt.charAt(n);
 
-  var si = setInterval($.proxy(function () {
-            typeWriting.call(this);
-        }, this), settings.interval);
+            $(this).text(res);
 
-function typeWriting(){
-    if(!aud.paused){    
-    aud.pause();
-    aud.currentTime = 0;
-    }
+            if(settings.txt.charAt(n)!==" "){
+                aud.play();
+            }
 
-    var res = track + settings.txt.charAt(n);
+            track = res;
 
-    $(this).text(res);
-
-    if(settings.txt.charAt(n)!==" "){
-            aud.play();
-        }
-
-    track = res;
-
-    if(n===len-1){
+            if(n===len-1){
         
-        clearInterval(si);
+                clearInterval(si);
 
-    }
+            }
 
-        n = n + 1;
-}
+            n = n + 1;
+            }
 
 
       
-       });
+    });
  
     }
  
