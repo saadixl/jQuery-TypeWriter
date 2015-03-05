@@ -1,5 +1,5 @@
 # jQuery-TypeWriter
-<p>A jQuery plugin for providing typewriter text effect on HTML tags.</p>
+<p>A jQuery plugin for creating typewriter text effect on HTML tags.</p>
 
 <h3>Dependency</h3>
 <ul><li>jQuery 1.11</li>
