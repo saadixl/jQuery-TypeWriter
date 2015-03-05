@@ -2,13 +2,15 @@
  
     $.fn.typeWriter = function( options ) {
  
-        var settings = $.extend({
+
+ 
+        return this.each(function (){
+        
+            var settings = $.extend({
             txt: "Hello, World",
             audioSrc:"",
             interval:500
-        }, options );
- 
-        return this.each(function (){
+            }, options );
             
             $(this).text(settings.txt.length);
 
@@ -54,4 +56,4 @@
  
     }
  
-}( jQuery ));
+})( jQuery );
